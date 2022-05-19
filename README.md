@@ -2,15 +2,16 @@
 
 ## users テーブル
 
-| Column                | Type    | Options     |
-| --------------------- | ------- | ----------- |
-| nickname              | string  | null: false |
-| email                 | string  | null: false |
-| password              | string  | null: false |
-| password confirmation | string  | null: false |
-| user_name             | string  | null: false |
-| kana_name             | string  | null: false |
-| birthday              | integer | null: false |
+| Column                | Type    | Options                                    |
+| --------------------- | ------- | ------------------------------------------ |
+| nickname              | string  | null: false, unique:true, uniqueness: true |
+| email                 | string  | null: false, unique:true, uniqueness: true |
+| encrypted_password    | string  | null: false                                |
+| last_name             | string  | null: false                                |
+| user_name             | string  | null: false                                |
+| kana_last_name        | string  | null: false                                |
+| kana_user_name        | string  | null: false                                |
+| birthday              | date    | null: false                                |
 
 ### Association
 
@@ -20,21 +21,22 @@
 
 ## items テーブル
 
-| Column                | Type    | Options     |
-| --------------------- | ------- | ----------- |
-| item_name             | string  | null: false |
-| explanation           | text    | null: false |
-| category              | integer | null: false |
-| situation             | integer | null: false |
-| delivery_charge       | integer | null: false |
-| area                  | integer | null: false |
-| days                  | integer | null: false |
+| Column                | Type       | Options     |
+| --------------------- | ---------- | ----------- |
+| item_name             | string     | null: false |
+| explanation           | text       | null: false |
+| nickname              | references | null: false, foreign_key: true |
+| category_id           | integer | null: false |
+| situation_id          | integer | null: false |
+| delivery_charge_id    | integer | null: false |
+| area_id               | integer | null: false |
+| days_id               | integer | null: false |
 | price                 | string  | null: false |
 
 ### Association
 
-- belongs_to :users
-- has_one :records
+- belongs_to :user
+- has_one :record
 
 
 ## records テーブル
@@ -46,23 +48,23 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
-- has_one :homes
+- belongs_to :user
+- belongs_to :item
+- has_one :home
 
 
 ## homes テーブル
 
 | Column                | Type       | Options     |
 | --------------------- | ---------- | ----------- |
-| post_number           | integer    | null: false |
-| area                  | integer    | null: false |
+| post_number           | string     | null: false |
+| area_id               | integer    | null: false |
 | city                  | string     | null: false |
 | house_number          | string     | null: false |
-| bilding_name          | string     | null: false |
+| bilding_name          | string     |             |
 | phone_number          | string     | null: false |
 
 ### Association
 
-- belongs_to :records
+- belongs_to :record
 
