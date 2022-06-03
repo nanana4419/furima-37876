@@ -1,27 +1,20 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
-  before_action :set_item, only: [:index,:edit, :show, :update, :destroy]
-  before_action :move_to_index1, except: [:show, :new, :create, :update]
-  before_action :move_to_index2, except: [:show, :new, :create, :update]
+  before_action :authenticate_user!
+  before_action :set_item, only: [:index]
+  before_action :move_to_index1, except: [:create]
+  before_action :move_to_index2, except: [:create]
 
   def index
-    @item = Item.find(params[:item_id])
-    @record_home = RecordHome.new
-  end
-
-  def new
     @record_home = RecordHome.new
   end
 
   def create
     @record_home = RecordHome.new(record_params)
-    @item = Item.find(params[:item_id])
     if @record_home.valid?
        pay_item
       @record_home.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
