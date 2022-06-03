@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index]
+  before_action :set_item, only: [:index, :create]
   before_action :move_to_index1, except: [:create]
   before_action :move_to_index2, except: [:create]
 
