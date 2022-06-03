@@ -23,15 +23,15 @@
       </span>
     </div>
 
-     <% if user_signed_in?  %>
+     <% if user_signed_in? && @item.record.nil? %>
        <% if current_user.id == @item.user_id %>
     <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-    <% if @item.record.present? %>
+       <%# elsif @item.record.present? %>
           <% else %>
     <%= link_to "購入画面に進む", item_records_path(@item.id), class:"item-red-btn"%>
-         <% end %>
+         <%# end %>
         <% end %>
       <% end %>
 
@@ -42,7 +42,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.item_name %></td>
+          <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
