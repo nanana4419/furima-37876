@@ -6,13 +6,15 @@ class RecordHome
     validates :token, presence: true
     validates :user_id
     validates :item_id
-    validates :post_number, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
-    validates :area_id, numericality: {other_than: 1, message: "can't be blank"}
+
+    validates :post_number, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "にハイフン(-)を入力してください"}
+    validates :post_number, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "は不正な値です"}
+    validates :area_id, numericality: {other_than: 1, message: "を入力してください"}
     validates :city, presence: true
   end
   validates :house_number, presence: true
   validates :phone_number, presence: true
-  validates :phone_number, format: {with: /\A\d{10,11}\z/, message: "is invalid."}
+  validates :phone_number, format: {with: /\A\d{10,11}\z/, message: "は不正な値です"}
 
   def save
     # 購入情報を保存し、変数recordに代入する

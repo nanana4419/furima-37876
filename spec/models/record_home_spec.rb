@@ -22,72 +22,72 @@ RSpec.describe RecordHome, type: :model do
         it 'itemが紐付いていないと購入できない' do
           @record_home.item_id = nil
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Item can't be blank")
+          expect(@record_home.errors.full_messages).to include("Itemを入力してください")
         end
         it 'userが紐付いていないと購入できない' do
           @record_home.user_id = nil
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("User can't be blank")
+          expect(@record_home.errors.full_messages).to include("Userを入力してください")
         end
         it "tokenが空では登録できない" do
           @record_home.token = nil
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Token can't be blank")
+          expect(@record_home.errors.full_messages).to include("クレジットカード情報を入力してください")
         end
         it '郵便番号が空欄なら購入できない' do
           @record_home.post_number = ''
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Post number can't be blank")
+          expect(@record_home.errors.full_messages).to include("郵便番号を入力してください")
         end
         it '郵便番号にハイフンが記入していなければ購入できない' do
           @record_home.post_number = '1234567'
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include('Post number is invalid. Include hyphen(-)')
+          expect(@record_home.errors.full_messages).to include('郵便番号にハイフン(-)を入力してください')
         end
         it '郵便番号が全角数字だと購入できない' do
           @record_home.post_number = '０００-００００'
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include('Post number is invalid. Include hyphen(-)')
+          expect(@record_home.errors.full_messages).to include('郵便番号は不正な値です')
         end
         it '都道府県が空欄なら購入できない' do
           @record_home.area_id = 1
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Area can't be blank")
+          expect(@record_home.errors.full_messages).to include("都道府県を入力してください")
         end
         it '市区町村が空欄なら購入できない' do
           @record_home.city = ''
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("City can't be blank")
+          expect(@record_home.errors.full_messages).to include("市区町村を入力してください")
         end
         it '番地が空欄なら購入できない' do
           @record_home.house_number = ''
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("House number can't be blank")
+          expect(@record_home.errors.full_messages).to include("番地を入力してください")
         end
         it '電話番号が空欄なら購入できない' do
           @record_home.phone_number = ''
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Phone number can't be blank")
+          expect(@record_home.errors.full_messages).to include("電話番号を入力してください")
         end
         it '電話番号にハイフンが記入していれば購入できない' do
           @record_home.phone_number = '000-00-0000'
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Phone number is invalid.")
+          expect(@record_home.errors.full_messages).to include("電話番号は不正な値です")
         end
         it '電話番号が全角数字だと購入できない' do
           @record_home.phone_number = '０８０１１１１２２２２'
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Phone number is invalid.")
+          expect(@record_home.errors.full_messages).to include("電話番号は不正な値です")
         end
         it '電話番号は9桁以下では購入できない' do
             @record_home.phone_number = '123456789'
             @record_home.valid?
-            expect(@record_home.errors.full_messages).to include("Phone number is invalid.")
+            expect(@record_home.errors.full_messages).to include("電話番号は不正な値です")
         end
         it '電話番号は12桁以上では購入できない' do
           @record_home.phone_number = '123456789123'
           @record_home.valid?
-          expect(@record_home.errors.full_messages).to include("Phone number is invalid.")
+          expect(@record_home.errors.full_messages).to include("電話番号は不正な値です")
         end
       end
   end
