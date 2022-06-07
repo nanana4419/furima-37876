@@ -22,7 +22,7 @@ if(location.pathname.match(/\/items\/\d/)){
     </div>`
   const comments = document.getElementById("comments")
   comments.insertAdjacentHTML('beforeend', html)
-  const commentForm = document.getElementById("comment-form")
+  const commentForm = document.getElementById("comment-box")
   commentForm.reset();
   }
 });
