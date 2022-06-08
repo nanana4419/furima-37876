@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
-  before_action :move_to_index1, except: [:index, :show, :new, :create, :update]
-  before_action :move_to_index2, except: [:index, :show, :new, :create, :update]
+  before_action :move_to_index1, except: [:index, :show, :new, :create, :update, :search]
+  before_action :move_to_index2, except: [:index, :show, :new, :create, :update, :search]
 
   def index
     @items = Item.order("created_at DESC")
@@ -56,6 +56,11 @@ class ItemsController < ApplicationController
     if @item.record.present?
       redirect_to action: :index
     end
+  end
+
+  def search
+    @q = Item.ransack(params[:q])
+    @items = @q.result
   end
 
   private
